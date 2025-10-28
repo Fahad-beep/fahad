@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   gridGap,
   space,
@@ -16,25 +16,37 @@ import {
   BordersProps,
 } from 'styled-system';
 
-export type GridProps = GridGapProps &
+export type GridProps = React.HTMLAttributes<HTMLDivElement> & GridGapProps &
   SpaceProps &
   StyledGridProps &
   LayoutProps &
   FlexboxProps &
-  BordersProps;
+  BordersProps & {
+    children?: React.ReactNode;
+      as?: keyof JSX.IntrinsicElements;
+  };
 
-const Grid = styled.div<GridProps>`
+const GridComponent = styled.div<GridProps>`
   display: grid;
   align-items: center;
   justify-content: flex-end;
 
-  grid-template-columns:
-    ${({ children }) =>
-      children &&
-      css`repeat(${React.Children.toArray(children).length}, auto);`}
-    ${compose(gridGap, grid, space, layout, flexbox, borders)};
+  ${compose(gridGap, grid, space, layout, flexbox, borders)}
+
+  ${(props: GridProps) => {
+    const childCount = React.Children.count(props.children);
+    return childCount > 0
+      ? `grid-template-columns: repeat(${childCount}, auto);`
+      : undefined;
+  }}
 `;
 
-Grid.defaultProps = {};
+const Grid = React.forwardRef<HTMLDivElement, GridProps>((props, ref) => (
+  <GridComponent ref={ref} {...props} />
+));
+
+Grid.displayName = 'Grid';
 
 export default Grid;
+
+// export type { GridProps };
