@@ -32,14 +32,8 @@ const GridComponent = styled.div<GridProps>`
   justify-content: flex-end;
 
   ${compose(gridGap, grid, space, layout, flexbox, borders)}
-
-  ${(props: GridProps) => {
-    const childCount = React.Children.count(props.children);
-    return childCount > 0
-      ? `grid-template-columns: repeat(${childCount}, auto);`
-      : undefined;
-  }}
 `;
+
 
 const Grid = React.forwardRef<HTMLDivElement, GridProps>((props, ref) => (
   <GridComponent ref={ref} {...props} />

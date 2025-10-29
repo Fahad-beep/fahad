@@ -32,7 +32,7 @@ const Blog: NextPage<BlogProps> = ({ page, recordMap }) => (
       }}
     />
     <Container textAlign="center" gridGap=".4rem" my="3rem">
-      <Text margin={0}>Antoine Ordonez</Text>
+      <Text margin={0}>Muhammad Fahad</Text>
       <small>{page.date}</small>
     </Container>
   </Container>

@@ -19,13 +19,13 @@ const Home = (): JSX.Element => (
       <Container alignItems="center" alignContent="center">
         <Image
           src="/me.webp"
-          alt="Antoine Ordonez"
+          alt="Muhammad Fahad"
           width={120}
           height={120}
           objectFit="cover"
           className={styles.image}
         />
-        <Title>Antoine Ordonez</Title>
+        <Title>Muhammad Fahad</Title>
         <Title
           fontSize="2rem"
           color="rgba(0, 0, 0, 0.6)"
