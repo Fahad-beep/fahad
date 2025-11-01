@@ -22,13 +22,13 @@ const Home = (): JSX.Element => (
           alt="Muhammad Fahad"
           width={120}
           height={120}
-          objectFit="cover"
+          style={{ objectFit: 'cover' }}
           className={styles.image}
         />
         <Title>Muhammad Fahad</Title>
         <Title
           fontSize="2rem"
-          color="rgba(0, 0, 0, 0.6)"
+          // REMOVED: color="rgba(0, 0, 0, 0.6)"
           fontWeight="500"
           as="h2"
         >
@@ -65,7 +65,7 @@ const Home = (): JSX.Element => (
           justifyItems="stretch"
           alignItems="stretch"
         >
-          <Link href="mailto:hello@shellbear.me">
+          <Link href="mailto:mfahadadi12004@gmail.com">
             <Button width="100%">
               <motion.span
                 initial={{ display: 'inline-block' }}
@@ -83,12 +83,12 @@ const Home = (): JSX.Element => (
           </Link>
           <Link
             target="_blank"
-            href="https://calendly.com/antoine-ordonez/intro"
+            href="https://calendly.com"
           >
             <Button
               width="100%"
-              backgroundColor="rgb(226,232,240)"
-              color="black"
+              backgroundColor="var(--app-surface)"
+              color="var(--app-text)"
               variant="secondary"
             >
               Schedule a meeting

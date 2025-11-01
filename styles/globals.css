@@ -1,28 +1,146 @@
+/* styles/global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radius: 0.625rem;
+  --font-sans: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  --font-mono: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+/* Light Mode (Default) */
+:root, .light {
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --primary: #3f5af3;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #000000;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #3f5af3;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #3f5af3;
+
+  /* Custom App Colors */
+  --app-bg: #ffffff;
+  --app-surface: #f8fafc;
+  --app-text: #000000;
+  --app-text-large: #3f5af3;
+  --app-accent: #3f5af3;
+  --app-footer: #f1f5f9;
+  --app-border: #e2e8f0;
+}
+
+/* Dark Mode */
+.dark {
+  --background: #02050a;
+  --foreground: #ffffff;
+  --card: #11151c;
+  --card-foreground: #ffffff;
+  --primary: #3f5af3;
+  --primary-foreground: #ffffff;
+  --secondary: #11151c;
+  --secondary-foreground: #ffffff;
+  --muted: #11151c;
+  --muted-foreground: #a1a1aa;
+  --accent: #3f5af3;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: #3f5af3;
+
+  /* Custom App Colors */
+  --app-bg: #02050a;
+  --app-surface: #11151c;
+  --app-text: #ffffff;
+  --app-text-large: #ffffff;
+  --app-accent: #3f5af3;
+  --app-footer: #11151c;
+  --app-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  border-color: var(--border);
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--app-bg);
+  color: var(--app-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
-  color: black;
-  font-weight: 700;
+  color: var(--app-accent);
+  font-weight: 600;
   display: inline-block;
   transition: all 200ms ease;
   text-decoration: none;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid transparent;
 }
 
 a:hover {
-  border-bottom-color: transparent;
+  border-bottom-color: var(--app-accent);
 }
 
-* {
-  box-sizing: border-box;
+/* Utility Classes */
+.bg-app-bg {
+  background-color: var(--app-bg);
 }
 
+.bg-app-surface {
+  background-color: var(--app-surface);
+}
+
+.bg-app-footer {
+  background-color: var(--app-footer);
+}
+
+.text-app-text {
+  color: var(--app-text);
+}
+
+.text-app-text-large {
+  color: var(--app-text-large);
+}
+
+.text-app-accent {
+  color: var(--app-accent);
+}
+
+.border-app-border {
+  border-color: var(--app-border);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--app-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--app-text);
+  border-radius: 4px;
+  opacity: 0.3;
+}
+
+/* Responsive */
 .mobile {
   display: none;
 }
@@ -37,33 +155,71 @@ a:hover {
   }
 }
 
-.container-yt {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
+/* Smooth transitions for theme switching */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
-.iframe-yt {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
+/* Add these to your existing global.css */
+
+/* Nav-specific dark mode fixes */
+.dark nav {
+  color: var(--app-text);
 }
 
-.notion-viewport {
-  z-index: -100;
+.dark .nav-background {
+  background: rgba(255, 255, 255, 0.05) !important;
 }
 
-.notion-header {
-  display: none;
+.dark .nav-indicator {
+  background: var(--app-bg) !important;
 }
 
-.notion-container {
-  max-width: 100vw;
+/* Ensure all text uses theme colors */
+body, p, h1, h2, h3, h4, h5, h6, span, div, a {
+  color: var(--app-text);
+  transition: color 0.3s ease;
 }
 
-.notion-full-page {
-  padding-bottom: 0 !important;
+/* Fix for any hardcoded colors in styled-components */
+.dark [style*="background: rgba(0, 0, 0, 0.04)"] {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.dark [style*="background: white"] {
+  background: var(--app-bg) !important;
+}
+
+/* Container background fixes */
+.dark .container,
+.dark .main,
+.dark .card,
+.dark .code {
+  background-color: var(--app-surface) !important;
+  color: var(--app-text) !important;
+}
+
+/* Force all text to use theme colors */
+* {
+  color: inherit;
+}
+
+/* Specific component overrides */
+.dark .title,
+.dark .text,
+.dark h1, 
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6,
+.dark p,
+.dark span {
+  color: var(--app-text) !important;
+}
+
+/* Button colors for dark mode */
+.dark button {
+  background-color: var(--app-surface) !important;
+  color: var(--app-text) !important;
 }

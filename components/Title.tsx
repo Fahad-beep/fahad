@@ -1,27 +1,33 @@
 import styled from 'styled-components';
 import {
-  fontSize,
-  fontWeight,
-  color,
-  textAlign,
-  margin,
+  typography,
+  space,
+  layout,
   compose,
-  FontSizeProps,
-  FontWeightProps,
-  TextAlignProps,
-  MarginProps,
-  ColorProps,
+  TypographyProps,
+  SpaceProps,
+  LayoutProps,
 } from 'styled-system';
 
-const Title = styled.h1<
-  FontSizeProps & ColorProps & FontWeightProps & TextAlignProps & MarginProps
->`
-  margin: 10px 0;
-  line-height: 1.15;
-  font-size: 4rem;
-  text-align: center;
+// Remove ColorProps to avoid the type conflict
+export type TitleProps = TypographyProps &
+  SpaceProps &
+  LayoutProps & {
+    as?: keyof JSX.IntrinsicElements;
+    children?: React.ReactNode;
+  };
 
-  ${compose(fontSize, fontWeight, color, textAlign, margin)}
+const TitleComponent = styled.h1<TitleProps>`
+  margin: 0;
+  font-weight: 700;
+  color: var(--app-text-large);
+  transition: color 0.3s ease;
+
+  ${compose(typography, space, layout)};
 `;
+
+const Title: React.FC<TitleProps> = ({ children, ...props }) => {
+  return <TitleComponent {...props}>{children}</TitleComponent>;
+};
 
 export default Title;

@@ -1,3 +1,4 @@
+/* styles/Home.module.css */
 .container {
   min-height: 100vh;
   max-width: 1280px;
@@ -6,6 +7,9 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  background-color: var(--app-bg);
+  color: var(--app-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .main {
@@ -17,28 +21,22 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-@media (max-width: 600px) {
-  .main {
-    padding: 1rem 0;
-    margin-top: 0;
-  }
-
-  .container {
-    padding: 0 1rem;
-  }
+  background-color: var(--app-bg);
+  color: var(--app-text);
 }
 
 .footer {
   width: 100%;
   height: 100px;
   padding: 80px;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid var(--app-border);
   flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--app-footer);
+  color: var(--app-text);
+  transition: all 0.3s ease;
 }
 
 .footer img {
@@ -49,23 +47,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--app-accent);
 }
 
 .title a {
-  color: #0070f3;
+  color: var(--app-accent);
   text-decoration: none;
+  border-bottom: 2px solid transparent;
 }
 
 .title a:hover,
 .title a:focus,
 .title a:active {
-  text-decoration: underline;
+  text-decoration: none;
+  border-bottom-color: var(--app-accent);
 }
 
 .title {
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
+  color: var(--app-text-large);
 }
 
 .title,
@@ -76,19 +78,22 @@
 .description {
   line-height: 1.5;
   font-size: 1.5rem;
+  color: var(--app-text);
 }
 
 .image {
   border-radius: 50%;
+  border: 3px solid var(--app-border);
 }
 
 .code {
-  background: #fafafa;
+  background: var(--app-surface);
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+  font-family: var(--font-mono);
+  color: var(--app-text);
+  border: 1px solid var(--app-border);
 }
 
 .grid {
@@ -98,6 +103,7 @@
   flex-wrap: wrap;
   max-width: 800px;
   margin-top: 3rem;
+  gap: 1rem;
 }
 
 .card {
@@ -107,16 +113,17 @@
   text-align: left;
   color: inherit;
   text-decoration: none;
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--app-border);
   border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.3s ease;
+  background-color: var(--app-surface);
 }
 
 .card:hover,
 .card:focus,
 .card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  color: var(--app-accent);
+  border-color: var(--app-accent);
 }
 
 .card h3 {
@@ -138,5 +145,22 @@
   .grid {
     width: 100%;
     flex-direction: column;
+  }
+  
+  .main {
+    padding: 1rem 0;
+    margin-top: 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .description {
+    font-size: 1.2rem;
   }
 }

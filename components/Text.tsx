@@ -1,49 +1,32 @@
 import styled from 'styled-components';
 import {
-  textAlign,
-  margin,
-  fontSize,
-  fontWeight,
-  display,
   typography,
-  color,
+  space,
   layout,
   compose,
-  TextAlignProps,
-  MarginProps,
-  FontWeightProps,
-  DisplayProps,
-  FontSizeProps,
   TypographyProps,
+  SpaceProps,
   LayoutProps,
 } from 'styled-system';
 
-const Text = styled.p<
-  TextAlignProps &
-    MarginProps &
-    FontSizeProps &
-    FontWeightProps &
-    DisplayProps &
-    TypographyProps &
-    LayoutProps
->`
-  font-size: 1.125rem;
-  margin: 0.75rem 0;
-  color: rgba(0, 0, 0, 0.7);
-  white-space: pre-wrap;
-  line-height: 160%;
-  letter-spacing: 0.02em;
+// Remove ColorProps to avoid the type conflict
+export type TextProps = TypographyProps &
+  SpaceProps &
+  LayoutProps & {
+    as?: keyof JSX.IntrinsicElements;
+    children?: React.ReactNode;
+  };
 
-  ${compose(
-    color,
-    textAlign,
-    margin,
-    fontSize,
-    fontWeight,
-    display,
-    typography,
-    layout,
-  )}
+const TextComponent = styled.p<TextProps>`
+  margin: 0;
+  color: var(--app-text);
+  transition: color 0.3s ease;
+
+  ${compose(typography, space, layout)};
 `;
+
+const Text: React.FC<TextProps> = ({ children, ...props }) => {
+  return <TextComponent {...props}>{children}</TextComponent>;
+};
 
 export default Text;

@@ -30,7 +30,7 @@ const states: { [key: string]: React.CSSProperties } = {
 };
 
 const NavLink = styled.a`
-  color: inherit;
+  color: var(--app-text);
   text-decoration: none;
   cursor: pointer;
   border-bottom: none;
@@ -64,6 +64,34 @@ const Links = (): JSX.Element => (
     <NavLink href="/projects">Projects</NavLink>
   </>
 );
+const NavBackground = styled.div`
+  background: var(--app-surface);
+  border-radius: 25px;
+  padding: 15px;
+  position: relative;
+  
+  /* Fallback */
+  background: rgba(0, 0, 0, 0.04);
+  
+  .dark & {
+    background: rgba(255, 255, 255, 0.1);
+  }
+`;
+
+const NavIndicator = styled.div`
+  background: var(--app-bg);
+  position: absolute;
+  border-radius: 25px;
+  height: 85%;
+  transition: all 0.3s ease;
+  
+  /* Ensure contrast */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  .dark & {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+  }
+`;
 
 const Nav = ({ isOpen, onOpen, onClose }: NavProps): JSX.Element => {
   const router = useRouter();
@@ -94,51 +122,57 @@ const Nav = ({ isOpen, onOpen, onClose }: NavProps): JSX.Element => {
         {isOpen ? (
           <Close
             size="2rem"
-            style={{ margin: '-0.3rem' }}
+            style={{ 
+              margin: '-0.3rem', 
+              color: 'var(--app-text)',
+              // Fallback
+              // color: 'inherit'
+            }}
             onClick={(evt) => evt.type === 'click' && onClose()}
           />
         ) : (
           <Menu
             size="1.6rem"
+            style={{ 
+              color: 'var(--app-text)',
+              // Fallback
+              // color: 'inherit'
+            }}
             onClick={(evt) => evt.type === 'click' && onOpen()}
           />
         )}
       </MenuContainer>
       {isOpen && (
-        <Grid gridTemplateColumns="1fr" style={{ fontSize: '2rem' }} py="3rem">
+        <Grid 
+          gridTemplateColumns="1fr" 
+          style={{ 
+            fontSize: '2rem',
+            color: 'var(--app-text)'
+          }} 
+          py="3rem"
+        >
           <Links />
         </Grid>
       )}
       <Container alignContent="center" display={['none', 'flex', 'flex']}>
-        <Grid
-          width="fit-content"
-          gridGap="2rem"
-          alignItems="center"
-          justifyItems="center"
-          gridTemplateColumns="repeat(5, auto)"
-          style={{
-            borderRadius: '25px',
-            background: 'rgba(0, 0, 0, 0.04)',
-            padding: '15px',
-            position: 'relative',
-          }}
-        >
-          <div
+        <NavBackground>
+          <Grid
+            width="fit-content"
+            gridGap="2rem"
+            alignItems="center"
+            justifyItems="center"
+            gridTemplateColumns="repeat(5, auto)"
             style={{
-              background: 'white',
-              position: 'absolute',
-              borderRadius: '25px',
-              height: '85%',
-              left: '6px',
-              width: '60px',
-              ...navStyle,
+              position: 'relative',
             }}
-          />
-          <Links />
-        </Grid>
+          >
+            <NavIndicator style={navStyle} />
+            <Links />
+          </Grid>
+        </NavBackground>
       </Container>
       <Container alignContent="flex-end" display={['none', 'none', 'flex']}>
-        <NavLink href="mailto:hello@shellbear.me">Contact</NavLink>
+        <NavLink href="mailto:mfahadadi12004@gmail.com">Contact</NavLink>
       </Container>
     </Grid>
   );

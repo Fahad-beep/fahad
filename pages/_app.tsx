@@ -14,9 +14,13 @@ import 'prismjs/components/prism-go';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-graphql';
 import 'prismjs/components/prism-bash';
+import ThemeToggle from '@components/ThemeToggle';
+// import SmoothScroll from '@components/SmoothScroll';
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => (
   <>
+  {/* <SmoothScroll > */}
+  <ThemeToggle />
     <Analytics />
     <Layout>
       <motion.div
@@ -27,6 +31,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => (
         <Component {...pageProps} />
       </motion.div>
     </Layout>
+    {/* </SmoothScroll> */}
   </>
 );
 
